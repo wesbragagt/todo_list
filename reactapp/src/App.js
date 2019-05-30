@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import Header from './components/layout/Header';
 import Todos from "./components/Todos";
+import { directive } from "@babel/types";
 class App extends Component {
     state = {
         todos: [
@@ -20,12 +22,16 @@ class App extends Component {
     };
     // Delete todo
     delTodo = (id)=>{
-        console.log(id);
+        this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]});
     }
     render() {
         console.log(this.state.todos);
         return (
-            <Todos delTodo={this.delTodo} markComplete={this.markComplete} todos={this.state.todos} />
+            <div>
+                <Header />
+                <Todos delTodo={this.delTodo} markComplete={this.markComplete} todos={this.state.todos} />
+            </div>
+            
         );
     }
 }
