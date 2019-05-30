@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Header from './components/layout/Header';
+import Header from "./components/layout/Header";
 import Todos from "./components/Todos";
-import { directive } from "@babel/types";
+import AddTodo from "./components/AddTodo";
+import "./App.css";
 class App extends Component {
     state = {
         todos: [
@@ -11,27 +12,37 @@ class App extends Component {
         ]
     };
     // Toggle Complete
-    
-    markComplete = (id) => {
-        this.setState({ todos: this.state.todos.map(todo=>{
-            if(todo.id === id){
-                todo.completed = !todo.completed
-            }
-            return todo;
-        })})
+
+    markComplete = id => {
+        this.setState({
+            todos: this.state.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.completed = !todo.completed;
+                }
+                return todo;
+            })
+        });
     };
     // Delete todo
-    delTodo = (id)=>{
-        this.setState({todos: [...this.state.todos.filter(todo => todo.id !== id)]});
-    }
+    delTodo = id => {
+        this.setState({
+            todos: [...this.state.todos.filter(todo => todo.id !== id)]
+        });
+    };
     render() {
         console.log(this.state.todos);
         return (
-            <div>
-                <Header />
-                <Todos delTodo={this.delTodo} markComplete={this.markComplete} todos={this.state.todos} />
+            <div className="App">
+                <div className="container">
+                    <Header />
+                    <AddTodo />
+                    <Todos
+                        delTodo={this.delTodo}
+                        markComplete={this.markComplete}
+                        todos={this.state.todos}
+                    />
+                </div>
             </div>
-            
         );
     }
 }
