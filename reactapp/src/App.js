@@ -1,10 +1,19 @@
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { Component } from "react";
+
+// Components
 import Header from "./components/layout/Header";
 import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
+import About from "./components/pages/About";
 
+// Packages
 import uuid from "uuid";
+
+// Style Sheets
 import "./App.css";
+
+// ------------------------------------------------------------------------------------------------------------------------------------
 class App extends Component {
     state = {
         todos: [
@@ -44,17 +53,27 @@ class App extends Component {
     render() {
         console.log(this.state.todos);
         return (
-            <div className="App">
-                <div className="container">
-                    <Header />
-                    <AddTodo addTodo={this.addTodo} />
-                    <Todos
-                        delTodo={this.delTodo}
-                        markComplete={this.markComplete}
-                        todos={this.state.todos}
-                    />
+            <Router>
+                <div className="App">
+                    <div className="container">
+                        <Header />
+                        <Route exact
+                            path="/"
+                            render={props => (
+                                <React.Fragment>
+                                    <AddTodo addTodo={this.addTodo} />
+                                    <Todos
+                                        delTodo={this.delTodo}
+                                        markComplete={this.markComplete}
+                                        todos={this.state.todos}
+                                    />
+                                </React.Fragment>
+                            )}
+                        />
+                        <Route path="/about" component={About} />
+                    </div>
                 </div>
-            </div>
+            </Router>
         );
     }
 }
