@@ -21,7 +21,7 @@ class App extends Component {
 
     componentDidMount() {
         axios
-            .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+            .get("https://jsonplaceholder.typicode.com/todos?_limit=2")
             .then(response => {
                 this.setState({ todos: response.data });
             });
@@ -65,7 +65,7 @@ class App extends Component {
         return (
             <Router>
                 <div className="App">
-                    <div className="container">
+                    <div className="container-fluid">
                         <Header />
                         <Route
                             exact
